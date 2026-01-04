@@ -15,7 +15,7 @@ Sign up takes less than a minute. You’ll receive your US shipping address righ
 </p>
 <div className="mt-6">
 <Link
-href={`${APP}/auth/register`}
+href={`${APP}/register`}
 className="inline-flex items-center rounded-xl px-4 py-2 text-white"
 style={{ backgroundColor: "#4A148C" }}
 >
