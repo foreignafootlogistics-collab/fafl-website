@@ -6,6 +6,7 @@
 import Link from "next/link";
 import * as React from "react";
 import Image from "next/image";
+import CalculatorPreview from "@/components/CalculatorPreview";
 
 // ===== Portal URL (Render App) =====
 const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://app.faflcourier.com").replace(/\/+$/, "");
@@ -598,43 +599,7 @@ export default function HomePage() {
                 Tip: Create your free account to see tracking updates and invoices in the portal.
               </p>
             </div>
-
-            <div className="rounded-2xl border border-gray-100 shadow-sm p-6 bg-white">
-              <div className="text-sm uppercase tracking-wider text-gray-500 mb-3">Calculator Preview</div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm text-gray-600">Declared Value (USD)</label>
-                  <input
-                    className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2"
-                    placeholder="e.g. 120"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm text-gray-600">Weight (lb)</label>
-                  <input
-                    className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2"
-                    placeholder="e.g. 3.5"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm text-gray-600">Category</label>
-                  <select className="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2">
-                    <option>Clothing & Footwear</option>
-                    <option>Laptops / Computers</option>
-                    <option>Phones / Electronics</option>
-                    <option>General Merchandise</option>
-                  </select>
-                </div>
-                <div className="flex items-end">
-                  <button className="w-full rounded-xl px-4 py-2 text-white" style={{ backgroundColor: "#4A148C" }}>
-                    Estimate
-                  </button>
-                </div>
-              </div>
-              <div className="mt-4 text-sm text-gray-600">
-                Estimated Total: <span className="font-semibold">JMD —</span>
-              </div>
-            </div>
+            <CalculatorPreview />
           </div>
         </div>
       </section>      
