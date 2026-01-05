@@ -58,6 +58,10 @@ export default function CalculatorPage() {
     })();
   }, []);
 
+  const toNum = (s: string) => {
+    const v = Number((s || "").replace(/,/g, ""));
+    return Number.isFinite(v) ? v : 0;
+  };
 
   const onEstimate = async () => {
     setError(null);
