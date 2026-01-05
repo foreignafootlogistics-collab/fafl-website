@@ -16,7 +16,7 @@ type EstimateResult = {
   grand_total: number;
 };
 
-const API = process.env.NEXT_PUBLIC_API_URL;
+const API = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/+$/, "");
 
 if (!API) {
   throw new Error("NEXT_PUBLIC_API_URL is not set");
@@ -37,7 +37,7 @@ export default function CalculatorPage() {
     (async () => {
       setError(null);
       try {
-        const res = await fetch(`${API}/api/categories`, { cache: "no-store" });
+        const res = await fetch(`${API}/public-api/categories`, { cache: "no-store" });
         const contentType = res.headers.get("content-type") || "";
 
         if (!res.ok) {
@@ -81,7 +81,7 @@ export default function CalculatorPage() {
         weight: toNum(weight),
       };
 
-      const res = await fetch(`${API}/api/estimate`, {
+      const res = await fetch(`${API}/public-api/estimate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
