@@ -16,7 +16,13 @@ type EstimateResult = {
   grand_total: number;
 };
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000";
+const API = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API) {
+  throw new Error("NEXT_PUBLIC_API_URL is not set");
+}
+
+
 
 export default function CalculatorPage() {
   const [categories, setCategories] = React.useState<string[]>([]);
