@@ -7,6 +7,7 @@ import Link from "next/link";
 import * as React from "react";
 import Image from "next/image";
 import CalculatorPreview from "@/components/CalculatorPreview";
+import SiteHeader from "@/components/SiteHeader";
 
 // ===== Portal URL (Render App) =====
 const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://app.faflcourier.com").replace(/\/+$/, "");
@@ -102,56 +103,11 @@ export const HomeIcon = (p: IconProps) => (
   </SvgWrap>
 );
 
-export const QuoteIcon = (p: IconProps) => (
-  <SvgWrap {...p}>
-    <path d="M7 7h6v6H7z" />
-    <path d="M17 7h6v6h-6z" />
-  </SvgWrap>
-);
-
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-gray-100 text-gray-900">
-      {/* ===== Header ===== */}
-      <header className="sticky top-0 z-30 backdrop-blur bg-white/85 border-b border-gray-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div
-              className="h-9 w-9 rounded-xl flex items-center justify-center text-white shadow"
-              style={{ backgroundColor: "#4A148C" }}
-            >
-              FA
-            </div>
-            <span className="font-semibold tracking-tight">FAFL Courier</span>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-8 text-sm">
-            <Link href="#services" className="hover:opacity-80">
-              Our Services
-            </Link>
-            <Link href="#rates" className="hover:opacity-80">
-              Rates
-            </Link>
-            <Link href="#how" className="hover:opacity-80">
-              How it Works
-            </Link>
-            <Link href="#contact" className="hover:opacity-80">
-              Contact
-            </Link>
-            <div className="h-6 w-px bg-gray-200" />
-            <Link href={`${APP_URL}/login`} className="hover:opacity-80">
-              Login
-            </Link>
-            <Link
-              href={`${APP_URL}/register`}
-              className="inline-flex items-center rounded-xl px-4 py-2 text-gray-900 shadow-sm font-semibold"
-              style={{ backgroundColor: "#FACC15" }}
-            >
-              Create Account Free
-            </Link>
-          </nav>
-        </div>
-      </header>
+      {/* ✅ Use shared header component */}
+      <SiteHeader />
 
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden bg-white">
@@ -171,46 +127,41 @@ export default function HomePage() {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             {/* LEFT */}
             <div>
-              {/* BRAND + LOGO */}
-              <div className="mb-6 flex flex-col sm:flex-row items-center sm:items-start gap-4">
-                {/* LOGO */}
-                <div className="relative h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 shrink-0">
-                  <Image
-                    src="/images/logo.png"
-                    alt="Foreign A Foot Logistics Limited logo"
-                    fill
-                    priority
-                    className="object-contain"
-                  />
+              {/* Logo + Headline beside it */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6">
+                {/* Logo */}
+                <div className="flex justify-center sm:justify-start shrink-0">
+                  <div className="relative h-32 w-32 sm:h-40 sm:w-40 lg:h-44 lg:w-44">
+                    <Image
+                      src="/images/logo.png"
+                      alt="Foreign A Foot Logistics logo"
+                      fill
+                      priority
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
 
-                {/* BRAND TEXT */}
+                {/* Headline beside logo */}
                 <div className="text-center sm:text-left">
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#4A148C]">
-                    Foreign A Foot Logistics Limited
+                  <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                    Shop in the US <span className="text-gray-400">•</span> Receive in Jamaica
                   </h1>
 
-                  <p className="mt-2 text-base sm:text-lg italic font-medium text-black">
-                    "delivering the world to you"
+                  <p className="mt-3 text-lg italic font-medium text-gray-800">
+                    “delivering the world to you”
                   </p>
-
-                  {/* subtle green brand accent */}
-                  <div className="mt-3 h-1 w-28 rounded-full bg-emerald-600 mx-auto sm:mx-0" />
                 </div>
-              </div>              
+              </div>
 
-              {/* Make this an H2 (since H1 is your company name now) */}
-              <h2 className="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                Shop in the US. <br className="hidden sm:block" />
-                Receive in Jamaica.
-              </h2>
-
-              <p className="mt-4 text-lg text-gray-700 max-w-xl">
-                Transparent pricing, faster processing, and real-time updates inside your FAFL portal. No subscriptions.
-                No hidden fees.
+              {/* DESCRIPTION */}
+              <p className="mt-4 text-lg text-gray-700 max-w-xl text-center sm:text-left">
+                Transparent pricing, faster processing, and real-time updates inside your FAFL portal.
+                No subscriptions. No hidden fees.
               </p>
 
-              <div className="mt-7 flex flex-col sm:flex-row gap-3">
+              {/* CTA */}
+              <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
                 <Link
                   href={`${APP_URL}/register`}
                   className="inline-flex items-center justify-center rounded-xl px-6 py-3 text-gray-900 text-base font-semibold shadow-sm"
@@ -351,7 +302,9 @@ export default function HomePage() {
 
             {/* RIGHT: Text */}
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">The Foreign A Foot Journey — Reimagined</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+                The Foreign A Foot Journey — Reimagined
+              </h2>
 
               <p className="mt-4 text-gray-700 text-lg">
                 From online checkout in the United States to delivery in Jamaica, FAFL Courier connects every step with
@@ -400,34 +353,30 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Our Services</h2>
             <p className="mt-4 text-gray-600 text-lg">
-              Foreign A Foot Logistics Limited offers reliable shipping and delivery options
-              designed to make overseas shopping easy — even if you don’t have a credit card.
+              Foreign A Foot Logistics Limited offers reliable shipping and delivery options designed to make overseas
+              shopping easy — even if you don’t have a credit card.
             </p>
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {/* Air Freight */}
             <ServiceCard
               title="Air Freight (3x Per Week)"
               desc="Fast air shipments to Jamaica three times weekly with reliable processing and updates."
               img="/images/services/air-freight.png"
               badge="Fast"
             />
-            {/* Sea Freight */}
             <ServiceCard
               title="Sea Freight (Weekly)"
               desc="Cost-effective sea freight once per week—great for larger or bulk shipments."
               img="/images/services/sea-freight.png"
               badge="Best Value"
             />
-            {/* Local Delivery */}
             <ServiceCard
               title="Local Delivery (incl. Knutsford Express)"
               desc="Pickup in-store or deliver islandwide, including Knutsford Express options."
               img="/images/services/local-delivery.png"
               badge="Islandwide"
             />
-            {/* Shopping Assist */}
             <ServiceCard
               title="No Credit Card? Use Ours"
               desc="Send us the link— we can purchase online items for you and ship them to Jamaica."
@@ -443,9 +392,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Bringing Global Shopping Home</h2>
-
             <div className="mt-3 h-1 w-28 rounded-full bg-emerald-600" />
-
             <p className="mt-3 text-gray-600">
               Accurate estimates, real-time updates, and a US address designed for smooth shopping.
             </p>
@@ -602,7 +549,7 @@ export default function HomePage() {
             <CalculatorPreview />
           </div>
         </div>
-      </section>      
+      </section>
 
       {/* ===== Final CTA ===== */}
       <section className="py-14 sm:py-20 bg-gray-50">
@@ -669,11 +616,89 @@ export default function HomePage() {
 
           <div>
             <h3 className="font-semibold">Contact</h3>
+
             <ul className="mt-3 space-y-1 text-sm text-gray-600">
               <li>WhatsApp / Phone: 876-210-4291</li>
               <li>Email: foreignafootlogistics@gmail.com</li>
             </ul>
+
+            {/* Social Icons */}
+            <div className="mt-4 flex items-center gap-4">
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/foreignafootlogistics"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-gray-600 hover:text-[#4A148C] transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </a>
+
+              {/* Twitter / X */}
+              <a
+                href="https://twitter.com/foreignafoot"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter X"
+                className="text-gray-600 hover:text-[#4A148C] transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 6 6 18" />
+                  <path d="M6 6l12 12" />
+                </svg>
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/18762104291"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="text-gray-600 hover:text-[#16A34A] transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12a9 9 0 0 1-13.5 7.7L3 21l1.3-4.5A9 9 0 1 1 21 12z" />
+                  <path d="M16.2 13.4c-.3-.1-1.8-.9-2.1-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.3 7.3 0 0 1-2.2-1.3 8.3 8.3 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.6l.5-.6c.2-.2.3-.3.4-.5s.1-.3 0-.5-.7-1.7-1-2.3c-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.5.1-.7.3s-1 1-1 2.5 1 2.9 1.1 3.1a11.6 11.6 0 0 0 4.4 4.1c.6.3 1.1.5 1.5.6.6.2 1.2.2 1.7.1.5-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z" />
+                </svg>
+              </a>
+            </div>
           </div>
+
 
           <div>
             <h3 className="font-semibold">Quick Links</h3>
@@ -717,11 +742,7 @@ export default function HomePage() {
 
 function Card({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div 
-      className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm
-                 hover:shadow-md transition-all duration-300
-                 hover:ring-2 hover:ring-emerald-100"
-    >
+    <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:ring-2 hover:ring-emerald-100">
       <div className="flex items-start gap-4">
         <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#F3E8FF" }}>
           {icon}
@@ -773,3 +794,5 @@ function ServiceCard({
     </div>
   );
 }
+
+
