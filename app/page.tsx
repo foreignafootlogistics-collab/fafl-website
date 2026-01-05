@@ -110,7 +110,7 @@ export const QuoteIcon = (p: IconProps) => (
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-gray-100 text-gray-900">
       {/* ===== Header ===== */}
       <header className="sticky top-0 z-30 backdrop-blur bg-white/85 border-b border-gray-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -125,6 +125,9 @@ export default function HomePage() {
           </div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm">
+            <Link href="#services" className="hover:opacity-80">
+              Our Services
+            </Link>
             <Link href="#rates" className="hover:opacity-80">
               Rates
             </Link>
@@ -167,15 +170,39 @@ export default function HomePage() {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             {/* LEFT */}
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold text-gray-700">
-                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: "#4A148C" }} />
-                US → Jamaica Shipping Made Simple
-              </div>
+              {/* BRAND + LOGO */}
+              <div className="mb-6 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                {/* LOGO */}
+                <div className="relative h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 shrink-0">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Foreign A Foot Logistics Limited logo"
+                    fill
+                    priority
+                    className="object-contain"
+                  />
+                </div>
 
-              <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                {/* BRAND TEXT */}
+                <div className="text-center sm:text-left">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#4A148C]">
+                    Foreign A Foot Logistics Limited
+                  </h1>
+
+                  <p className="mt-2 text-base sm:text-lg italic font-medium text-black">
+                    "delivering the world to you"
+                  </p>
+
+                  {/* subtle green brand accent */}
+                  <div className="mt-3 h-1 w-28 rounded-full bg-emerald-600 mx-auto sm:mx-0" />
+                </div>
+              </div>              
+
+              {/* Make this an H2 (since H1 is your company name now) */}
+              <h2 className="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
                 Shop in the US. <br className="hidden sm:block" />
                 Receive in Jamaica.
-              </h1>
+              </h2>
 
               <p className="mt-4 text-lg text-gray-700 max-w-xl">
                 Transparent pricing, faster processing, and real-time updates inside your FAFL portal. No subscriptions.
@@ -313,7 +340,6 @@ export default function HomePage() {
                 className="rounded-3xl object-cover object-center"
               />
 
-              {/* subtle label */}
               <div
                 className="absolute bottom-4 left-4 rounded-2xl px-4 py-2 text-sm font-semibold text-white shadow"
                 style={{ backgroundColor: "#4A148C" }}
@@ -367,11 +393,58 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== Our Services ===== */}
+      <section id="services" className="py-16 sm:py-24 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Our Services</h2>
+            <p className="mt-4 text-gray-600 text-lg">
+              Foreign A Foot Logistics Limited offers reliable shipping and delivery options
+              designed to make overseas shopping easy — even if you don’t have a credit card.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Air Freight */}
+            <ServiceCard
+              title="Air Freight (3x Per Week)"
+              desc="Fast air shipments to Jamaica three times weekly with reliable processing and updates."
+              img="/images/services/air-freight.png"
+              badge="Fast"
+            />
+            {/* Sea Freight */}
+            <ServiceCard
+              title="Sea Freight (Weekly)"
+              desc="Cost-effective sea freight once per week—great for larger or bulk shipments."
+              img="/images/services/sea-freight.png"
+              badge="Best Value"
+            />
+            {/* Local Delivery */}
+            <ServiceCard
+              title="Local Delivery (incl. Knutsford Express)"
+              desc="Pickup in-store or deliver islandwide, including Knutsford Express options."
+              img="/images/services/local-delivery.png"
+              badge="Islandwide"
+            />
+            {/* Shopping Assist */}
+            <ServiceCard
+              title="No Credit Card? Use Ours"
+              desc="Send us the link— we can purchase online items for you and ship them to Jamaica."
+              img="/images/services/shopping-assist.png"
+              badge="Shopping Help"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ===== Why Choose ===== */}
       <section className="py-14 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Built for Jamaica, Powered by Service</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Bringing Global Shopping Home</h2>
+
+            <div className="mt-3 h-1 w-28 rounded-full bg-emerald-600" />
+
             <p className="mt-3 text-gray-600">
               Accurate estimates, real-time updates, and a US address designed for smooth shopping.
             </p>
@@ -397,10 +470,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== HOW IT WORKS (Polished) ===== */}
+      {/* ===== HOW IT WORKS ===== */}
       <section id="how" className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">How FAFL Courier Works</h2>
             <p className="mt-4 text-gray-600">
@@ -408,9 +480,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Image + Steps */}
           <div className="mt-14 grid lg:grid-cols-2 gap-12 items-center">
-            {/* LEFT: IMAGE WITH STEP BADGES */}
+            {/* LEFT: IMAGE */}
             <div className="relative">
               <Image
                 src="/images/how-it-works.png"
@@ -419,34 +490,9 @@ export default function HomePage() {
                 height={700}
                 className="rounded-3xl shadow-lg"
               />
-
-              {/* Step badges */}
-              {[
-                { step: 1, label: "Shop Online", top: "10%", left: "8%" },
-                { step: 2, label: "We Receive", top: "45%", left: "5%" },
-                { step: 3, label: "We Ship", top: "20%", right: "8%" },
-                { step: 4, label: "Pickup / Delivery", bottom: "10%", right: "6%" },
-              ].map((s) => (
-                <div
-                  key={s.step}
-                  className="absolute hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
-                  style={{
-                    backgroundColor: "#FACC15",
-                    ...(Object.prototype.hasOwnProperty.call(s, "top") ? { top: (s as any).top } : {}),
-                    ...(Object.prototype.hasOwnProperty.call(s, "bottom") ? { bottom: (s as any).bottom } : {}),
-                    ...(Object.prototype.hasOwnProperty.call(s, "left") ? { left: (s as any).left } : {}),
-                    ...(Object.prototype.hasOwnProperty.call(s, "right") ? { right: (s as any).right } : {}),
-                  }}
-                >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white text-xs">
-                    {s.step}
-                  </span>
-                  {s.label}
-                </div>
-              ))}
             </div>
 
-            {/* RIGHT: STEPS LIST */}
+            {/* RIGHT: STEPS */}
             <div className="space-y-6">
               {[
                 {
@@ -473,12 +519,9 @@ export default function HomePage() {
               ].map((step, index) => (
                 <div
                   key={step.title}
-                  className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm
-                             opacity-0 translate-y-6 animate-[fadeUp_0.6s_ease-out_forwards]"
-                  style={{ animationDelay: `${index * 120}ms` }}
+                  className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md"
                 >
                   <div className="flex gap-4 items-start">
-                    {/* Step number */}
                     <div
                       className="flex h-10 w-10 items-center justify-center rounded-xl font-extrabold text-white shrink-0"
                       style={{ backgroundColor: "#4A148C" }}
@@ -488,7 +531,6 @@ export default function HomePage() {
 
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        {/* micro-icon */}
                         <div
                           className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0"
                           style={{ backgroundColor: "#F3E8FF", color: "#4A148C" }}
@@ -496,13 +538,11 @@ export default function HomePage() {
                         >
                           {step.icon}
                         </div>
-
                         <h3 className="font-semibold text-lg">{step.title}</h3>
                       </div>
 
                       <p className="mt-2 text-gray-600 text-sm">{step.desc}</p>
 
-                      {/* CTA under Step 4 */}
                       {(step as any).isLast && (
                         <div className="mt-4 flex flex-wrap gap-3">
                           <Link
@@ -527,8 +567,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </div>       
-
+        </div>
       </section>
 
       {/* ===== Rates ===== */}
@@ -587,10 +626,7 @@ export default function HomePage() {
                   </select>
                 </div>
                 <div className="flex items-end">
-                  <button
-                    className="w-full rounded-xl px-4 py-2 text-white"
-                    style={{ backgroundColor: "#4A148C" }}
-                  >
+                  <button className="w-full rounded-xl px-4 py-2 text-white" style={{ backgroundColor: "#4A148C" }}>
                     Estimate
                   </button>
                 </div>
@@ -601,23 +637,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* ===== Testimonial ===== */}
-      <section className="py-14 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <figure className="mx-auto max-w-3xl rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
-            <div className="flex items-center gap-3 text-gray-500 text-sm">
-              <QuoteIcon className="h-5 w-5" />
-              Verified Customer Review
-            </div>
-            <blockquote className="mt-3 text-xl font-medium leading-relaxed">
-              “The most reliable courier I’ve ever used. No stress. Transparent fees and on-time delivery.”
-            </blockquote>
-            <figcaption className="mt-2 text-sm text-gray-500">— Kingston, JA</figcaption>
-          </figure>
-        </div>
-      </section>
+      </section>      
 
       {/* ===== Final CTA ===== */}
       <section className="py-14 sm:py-20 bg-gray-50">
@@ -642,9 +662,9 @@ export default function HomePage() {
 
           {/* Trusted stores */}
           <div className="mt-10">
-            <p className="text-sm font-medium text-gray-500 mb-4">Shop from your favorite online stores</p>
+            <p className="text-base font-semibold text-gray-700 mb-5">Shop from your favorite online stores</p>
 
-            <div className="flex flex-wrap justify-center items-center gap-6 opacity-80">
+            <div className="flex flex-wrap justify-center items-center gap-10 opacity-95">
               {[
                 { src: "/images/brands/amazon.png", alt: "Amazon" },
                 { src: "/images/brands/ebay.png", alt: "eBay" },
@@ -656,9 +676,9 @@ export default function HomePage() {
                   key={brand.alt}
                   src={brand.src}
                   alt={brand.alt}
-                  width={90}
-                  height={40}
-                  className="object-contain hover:scale-105 transition-all duration-300"
+                  width={140}
+                  height={60}
+                  className="object-contain hover:scale-110 transition-all duration-300"
                 />
               ))}
             </div>
@@ -694,6 +714,21 @@ export default function HomePage() {
             <h3 className="font-semibold">Quick Links</h3>
             <ul className="mt-3 space-y-1 text-sm">
               <li>
+                <Link href="#services" className="hover:opacity-80">
+                  Our Services
+                </Link>
+              </li>
+              <li>
+                <Link href="#rates" className="hover:opacity-80">
+                  Rates
+                </Link>
+              </li>
+              <li>
+                <Link href="#how" className="hover:opacity-80">
+                  How it Works
+                </Link>
+              </li>
+              <li>
                 <Link href={`${APP_URL}/register`} className="hover:opacity-80">
                   Create Account
                 </Link>
@@ -701,16 +736,6 @@ export default function HomePage() {
               <li>
                 <Link href={`${APP_URL}/login`} className="hover:opacity-80">
                   Login
-                </Link>
-              </li>
-              <li>
-                <Link href="/rates" className="hover:opacity-80">
-                  Rates
-                </Link>
-              </li>
-              <li>
-                <Link href="#how" className="hover:opacity-80">
-                  How it Works
                 </Link>
               </li>
             </ul>
@@ -727,7 +752,11 @@ export default function HomePage() {
 
 function Card({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+    <div 
+      className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm
+                 hover:shadow-md transition-all duration-300
+                 hover:ring-2 hover:ring-emerald-100"
+    >
       <div className="flex items-start gap-4">
         <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#F3E8FF" }}>
           {icon}
@@ -741,3 +770,41 @@ function Card({ icon, title, desc }: { icon: React.ReactNode; title: string; des
   );
 }
 
+function ServiceCard({
+  title,
+  desc,
+  img,
+  badge,
+}: {
+  title: string;
+  desc: string;
+  img: string;
+  badge?: string;
+}) {
+  return (
+    <div className="group rounded-3xl border border-gray-200 bg-white shadow-sm overflow-hidden hover:shadow-md transition-all duration-300">
+      <div className="relative h-40 w-full bg-gray-100">
+        <Image
+          src={img}
+          alt={title}
+          fill
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
+        />
+
+        {badge ? (
+          <div
+            className="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-semibold text-white shadow"
+            style={{ backgroundColor: "#16A34A" }}
+          >
+            {badge}
+          </div>
+        ) : null}
+      </div>
+
+      <div className="p-5">
+        <h3 className="font-semibold text-lg">{title}</h3>
+        <p className="mt-2 text-sm text-gray-600">{desc}</p>
+      </div>
+    </div>
+  );
+}
