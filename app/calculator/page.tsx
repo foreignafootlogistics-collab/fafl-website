@@ -28,40 +28,69 @@ export default function CalculatorPage() {
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    fetch(`${API}/api/categories`, { cache: "no-store" })
-      .then(r => r.json())
-      .then(data => {
+    (async () => {
+      setError(null);
+      try {
+        const res = await fetch(`${API}/api/categories`, { cache: "no-store" });
+        const contentType = res.headers.get("content-type") || "";
+
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`API error ${res.status}: ${text.slice(0, 160)}`);
+        }
+
+        if (!contentType.includes("application/json")) {
+          const text = await res.text();
+          throw new Error(`Expected JSON but got ${contentType}. Body: ${text.slice(0, 160)}`);
+        }
+
+        const data = await res.json();
+
         if (data?.ok && Array.isArray(data.categories)) {
           setCategories(data.categories);
           setCategory(data.categories[0] || "");
         } else {
-          setError("Failed to load categories");
+          throw new Error(data?.error || "Failed to load categories");
         }
-      })
-      .catch(() => setError("Failed to load categories"));
+      } catch (e: any) {
+        setError(String(e?.message || e));
+      }
+    })();
   }, []);
 
-  const toNum = (s: string) => {
-    const v = Number((s || "").replace(/,/g, ""));
-    return Number.isFinite(v) ? v : 0;
-  };
 
   const onEstimate = async () => {
     setError(null);
     setEstimate(null);
     setLoading(true);
+
     try {
       const payload = {
         category,
         invoice_usd: toNum(invoiceUsd),
         weight: toNum(weight),
       };
+
       const res = await fetch(`${API}/api/estimate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
+      const contentType = res.headers.get("content-type") || "";
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`API error ${res.status}: ${text.slice(0, 160)}`);
+      }
+
+      if (!contentType.includes("application/json")) {
+        const text = await res.text();
+        throw new Error(`Expected JSON but got ${contentType}. Body: ${text.slice(0, 160)}`);
+      }
+
       const data = await res.json();
+
       if (!data?.ok) throw new Error(data?.error || "Estimate failed");
       setEstimate(data.result as EstimateResult);
     } catch (e: any) {
@@ -70,6 +99,7 @@ export default function CalculatorPage() {
       setLoading(false);
     }
   };
+
 
   // Quick test buttons (smoke tests)
   const quick = (v: { usd: number; lb: number; cat?: string }) => {
